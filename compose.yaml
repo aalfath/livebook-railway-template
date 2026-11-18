@@ -1,0 +1,15 @@
+# Local test: the same settings the Railway template uses.
+#   LIVEBOOK_PASSWORD=$(openssl rand -hex 16) LIVEBOOK_SECRET_KEY_BASE=$(openssl rand -hex 32) docker compose up --build
+services:
+  livebook:
+    build: .
+    environment:
+      PORT: "8080"
+      LIVEBOOK_PASSWORD: ${LIVEBOOK_PASSWORD:?set LIVEBOOK_PASSWORD (12+ characters)}
+      LIVEBOOK_SECRET_KEY_BASE: ${LIVEBOOK_SECRET_KEY_BASE:?set LIVEBOOK_SECRET_KEY_BASE (64+ characters)}
+    ports:
+      - "8080:8080"
+    volumes:
+      - livebook-data:/data
+volumes:
+  livebook-data:
